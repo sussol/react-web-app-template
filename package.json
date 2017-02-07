@@ -5,7 +5,7 @@
   "description": "Template of react webapp for Sussol to use each time we start a new project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "http-server -p 3000 .",
     "start": "npm run webpack-server & npm run web-server",
