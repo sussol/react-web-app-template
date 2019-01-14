@@ -15,6 +15,7 @@ function getEntrySources(sources) {
 }
 
 module.exports = {
+  mode: 'production', // 'production' | 'development' | 'none'
   entry: getEntrySources(['babel-polyfill', './src/js/index.js']),
   output: {
     publicPath: PROD ? './build/' : 'http://localhost:8080/build/',
@@ -23,35 +24,51 @@ module.exports = {
   },
   devtool: PROD ? 'cheap-module-source-map' : 'eval',
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'source-map',
-      },
-    ],
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: [
-          'react-hot',
-          'babel',
+        use: [
+          {
+            loader: 'babel-loader',
+          },
         ],
       },
       {
         test: /\.css$/,
-        loaders: [
-          'css-loader',
+        use: [
+          {
+            loader: 'css-loader',
+          },
         ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff|svg)$/,
-        loader: 'file-loader',
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
       {
         test: /\.html$/,
-        loader: 'html',
+        use: [
+          {
+            loader: 'html-loader',
+          },
+        ],
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+
+        use: [
+          {
+            loader: 'source-map-loader',
+          },
+        ],
+
+        enforce: 'pre',
       },
     ],
   },

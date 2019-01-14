@@ -1,1 +1,5 @@
-export const globalStyles = {};
+export const globalStyles = {
+  typography: {
+    useNextVariants: true,
+  },
+};
